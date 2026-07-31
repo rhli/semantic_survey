@@ -1,0 +1,22 @@
+/* 在左侧文件浏览器中隐藏基础设施文件夹，让侧边栏只剩 0-5 的内容目录。
+ *
+ * 启用方式：设置 → 外观 → CSS 代码片段 → 打开开关（若未出现先点刷新图标）。
+ *
+ * 注意：这只影响侧边栏显示。这些文件夹里的笔记仍可通过快速切换（Cmd+O）、
+ * 全局搜索、双链正常访问；模板插件、附件写入也照常工作。
+ */
+
+.nav-folder:has(> .nav-folder-title[data-path="_templates"]),
+.nav-folder:has(> .nav-folder-title[data-path="_assets"]),
+.nav-folder:has(> .nav-folder-title[data-path="_archive"]) {
+  display: none;
+}
+
+/* _meta 存放本库的设计与约定文档，属于真实内容，默认保留显示。
+ * 若也想隐藏，取消下面的注释： */
+
+/*
+.nav-folder:has(> .nav-folder-title[data-path="_meta"]) {
+  display: none;
+}
+*/
