@@ -6,7 +6,7 @@ source_type: blog
 publisher: Datus
 published:
 accessed: 2026-07-31
-companies: [dbt-labs, cube, atscale, snowflake, databricks]
+companies: [fivetran-dbt-labs, cube, atscale, snowflake, databricks]
 topics: ["[[Semantic Layer]]", "[[Open Semantic Interchange]]"]
 ---
 

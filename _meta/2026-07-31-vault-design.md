@@ -174,9 +174,22 @@ topics: ["[[Metrics Layer]]"]
 ## 6. 语言与命名约定
 
 - 正文中文；术语、产品名、专有名词保留英文（首次出现可加中文注释）。
-- 文件名英文，自然写法（`Unity Catalog.md`、`Metrics Layer.md`），不用 kebab-case——文件名即双链显示名。
+- 文件名英文，自然写法（`Unity Catalog.md`、`Metrics Layer.md`），不用 kebab-case——文件名即双链显示名。对比页与洞见页可用中文标题（`上下文层的四条路线.md`），因为它们是本库自产的判断而非外部专名。
 - 公司 slug 全库统一小写：`databricks`、`snowflake`、`atlan`、`aloudata`。
 - 双链指向页面用 `[[Unity Catalog]]`；正文首次提及相关概念时就建链，宁多勿少。
+- **对比页不带日期前缀**（`Capability Matrix.md`），**洞见页带日期前缀**（`2026-07-31 <判断短语>.md`）。前者是持续维护的活页面，后者是某个时点的判断。
+
+### 并购与更名的处理
+
+赛道并购频繁（如 dbt Labs 于 2026-06 并入 Fivetran），约定如下：
+
+1. **页面重命名为合并后的官方名称**，用 `git mv` 保留历史。
+2. **slug 换为合并后的形式**（`dbt-labs` → `fivetran-dbt-labs`），并**同步更新全库所有 `company:` / `companies:` 字段**，包括并购前发布的旧材料——slug 标识的是本库中的**实体**，不是材料发表时的公司名。否则公司页的 Dataview 会漏掉旧来源。
+3. 旧名进 `aliases`，使指向旧名的双链仍可解析。
+4. 公司页顶部加**命名说明块**，交代新旧名称的时间分界、slug 约定，以及本库跟踪范围（合并后的实体往往含大量超出本库主题的业务）。
+5. 笔记正文按材料的时间点使用当时的名称，不做时代错置的改写。
+
+改完后跑一次链接与重名检查（见第 11 节）。
 
 ## 7. Dataview 视图
 
@@ -238,7 +251,33 @@ CSS 片段已随库提供（默认隐藏 `_templates`、`_assets`、`_archive`�
 - 对比页：先建 `Capability Matrix.md` 一个。
 - 种子页先建骨架（frontmatter + 章节标题 + 待调研问题清单），内容由后续调研工作流填充。
 
-## 11. 非目标
+## 11. 一致性检查
+
+每轮调研收尾时跑一次，检查两件事：**双链是否都能解析**、**是否有重名笔记**（重名会造成双链歧义，Obsidian 会随机选一个）。
+
+在 vault 根目录执行：
+
+```bash
+python3 - <<'EOF'
+import re, os, glob
+basenames = {}
+for p in glob.glob('**/*.md', recursive=True):
+    basenames.setdefault(os.path.splitext(os.path.basename(p))[0], []).append(p)
+missing = {}
+for p in glob.glob('**/*.md', recursive=True):
+    if p.startswith('_archive/') or p.startswith('_templates/'): continue
+    txt = re.sub(r'```.*?```', '', open(p, encoding='utf-8').read(), flags=re.S)
+    for m in re.findall(r'\[\[([^\]\|#]+)', txt):
+        t = m.strip()
+        if t and t not in basenames: missing.setdefault(t, []).append(p)
+print("MISSING:", missing if missing else "none")
+print("DUPS:", {k:v for k,v in basenames.items() if len(v)>1} or "none")
+EOF
+```
+
+两处必要的细节：`_templates/` 要排除（模板里有 `<同名> (raw)` 这类占位符），代码块要剥掉（示例 YAML 里的双链不是真链接）；但 `_archive/` **必须计入 basenames**，否则 source 笔记指向存档的 `(raw)` 链接会被误报为断链。
+
+## 12. 非目标
 
 - 不做自动化剪藏管道（Readwise 之类），来源笔记由调研工作流产生。
 - 不全量存档网页快照，只按第 4 节的三条标准选择性存档。

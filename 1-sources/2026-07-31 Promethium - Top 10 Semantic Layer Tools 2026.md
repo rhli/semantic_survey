@@ -6,7 +6,7 @@ source_type: blog
 publisher: Promethium
 published: 2026-03-05
 accessed: 2026-07-31
-companies: [dbt-labs, atscale, snowflake, cube, databricks, denodo, promethium]
+companies: [fivetran-dbt-labs, atscale, snowflake, cube, databricks, denodo, promethium]
 topics: ["[[Semantic Layer]]", "[[Text2SQL]]", "[[Open Semantic Interchange]]"]
 archive: "[[2026-07-31 Promethium - Top 10 Semantic Layer Tools 2026 (raw)]]"
 ---

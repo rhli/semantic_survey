@@ -28,6 +28,9 @@ Databricks 并行运行着两套性质不同的语义系统，二者的分工是
 | Databricks | 人工定义 + 自动图谱**并存**，OntoRank 仲裁 | 两套系统长期共存 |
 | Snowflake | Semantic View **Autopilot**：从 BI 使用模式自动生成定义，交人审核 | 仍是一套人工确认的定义 |
 | Atlan | 摄取他家语义定义 + 绑定治理元数据，做跨平台 [[Context Layer]] | 一套跨平台的上下文层，不自产定义 |
+| Fivetran + dbt Labs | [[Agents Schema]]：把既有元数据发布进**客户自己数仓**的 SQL 表 | 一个开放标准 + 客户自有的发现层，不做仲裁 |
+
+> **后续修订**：调研 dbt 时发现了第四条路线（Agents Schema），三分法已扩展为四分法并沉淀为独立对比页 [[上下文层的四条路线]]。本页保留 Databricks 一侧的原始判断，横向部分以对比页为准。
 
 Snowflake 的路线更保守也更可控：自动化用在**降低建模成本**上，最终事实源仍然唯一。Databricks 更激进：接受"大部分企业语义永远不会被显式建模"这一现实，转而用排序机制在混乱中找出最可信的那一条。
 
@@ -59,6 +62,7 @@ Snowflake 的路线更保守也更可控：自动化用在**降低建模成本**
 
 ## 后续动作
 
-- [ ] 调研 Snowflake 时重点对比 Autopilot 与 Ontology 的路线差异，验证上面的三分法
+- [x] 沉淀为独立对比页：[[上下文层的四条路线]]（2026-07-31，调研 dbt 后完成，三分法扩为四分法）
+- [ ] 调研 Snowflake 时重点对比 Autopilot 与 Ontology 的路线差异，验证四分法
 - [ ] 调研 Atlan 时判断其 Context Graph 与 Genie Ontology 的真实重叠度（双方都自称互补）
-- [ ] 若这个三分法成立，在 `4-comparisons/` 下沉淀独立对比页：语义层如何解决建模成本问题
+- [ ] 新增待验证点：Agents Schema 暴露出"元数据本身是否需要访问控制"这个问题，Databricks 的逐来源 ACL 是否会成为差异化卖点
