@@ -21,8 +21,9 @@ updated: 2026-07-31
 
 | 公司 | 产品 | 状态 | 要点 |
 |---|---|---|---|
-| Databricks | [[Unity Catalog]]（Business Semantics / Metric Views） | GA（2026 初，部分开源） | 指标定义为 UC 治理对象，SQL/YAML 定义，查询时动态编译 |
-| Databricks | [[Genie]]（AI/BI Genie + Genie Ontology） | GA | NL 查询 grounding 在 Metric Views 上；Genie Ontology 是"持续学习的企业上下文层" |
+| Databricks | [[Unity Catalog]]（Business Semantics / Metric Views） | GA 2026，核心实现开源进 Spark（SPARK-54119） | 指标定义为 UC 治理对象，SQL/YAML 定义，查询时确定性编译 |
+| Databricks | [[Genie]]（Genie One + Genie Agents） | GA（2026-06 发布） | NL 查询 grounding 在 Metric Views 上；已扩展为 AI coworker + 自治 agent，多端交付 |
+| Databricks | [[Genie Ontology]] | gated public preview | 自动上下文层：从 lakehouse + 50+ 外部工具抽取知识，OntoRank 权威度排序 |
 | Snowflake | [[Snowflake Semantic Views]]（+ Semantic View Autopilot） | GA，Autopilot 2026 初发布 | 语义视图为 catalog 一等对象；Autopilot 从 BI 使用模式自动生成语义定义 |
 | Snowflake | [[Cortex Analyst]] | GA | 基于 Semantic Views 的 conversational analytics API |
 | Google | Looker / LookML | 成熟 | BI 原生语义层的代表，Gemini 集成 |
@@ -76,6 +77,7 @@ updated: 2026-07-31
 - **[[Text2SQL]] 与语义层的关系**：全行业统一叙事——LLM 直接对裸 schema 写 SQL 准确率约 40%，grounding 在治理语义定义上可达 83%+（dbt 内部测试口径，多家引用）。语义层被重新定位为 AI 的事实基础。
 - **MCP（Model Context Protocol）**：2026 年语义层产品的标配暴露方式。
 - **Semantic Layer vs Context Layer vs Catalog**：三者边界正在重划，是理解 Atlan 等厂商定位的关键。
+- **建模成本问题的三条解法**：人工定义 + 自动图谱并存（Databricks）、自动生成交人审核（Snowflake Autopilot）、摄取他家定义做跨平台上下文层（Atlan）。见 [[2026-07-31 Databricks 的双层语义架构]]，待 Snowflake、Atlan 深研后沉淀为独立对比页。
 
 ## 调研分层建议（待确认）
 

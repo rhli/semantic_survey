@@ -16,13 +16,19 @@ type: meta
 
 | 公司 | 产品 |
 |---|---|
-| [[Databricks]] | [[Unity Catalog]] · [[Genie]] |
+| [[Databricks]] | [[Unity Catalog]] · [[Genie]] · [[Genie Ontology]] |
 | [[Snowflake]] | [[Snowflake Semantic Views]] · [[Cortex Analyst]] |
 | [[dbt Labs]] | [[dbt Semantic Layer]] |
 | [[Cube Dev]] | [[Cube]] |
 | [[AtScale]] | （公司即产品） |
 | [[Atlan]] | （公司即产品） |
 | [[Aloudata]] | [[Aloudata CAN]] |
+
+## 洞见
+
+```dataview
+LIST FROM "5-insights" SORT date DESC
+```
 
 ## 待修订（draft）
 

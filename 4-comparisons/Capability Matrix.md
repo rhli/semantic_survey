@@ -35,7 +35,7 @@ dv.table(["能力", "产品"], caps.map(c => [
 
 | 产品 | 语义表达力 | 查询编译 | 加速机制 | AI grounding | 开放性 | 备注 |
 |---|---|---|---|---|---|---|
-| [[Unity Catalog]] | | | | | | |
+| [[Unity Catalog]] | star/snowflake join、one_to_many、composability、parameters、window（实验性） | 声明式 + 查询时确定性编译；fan-out 靠声明不校验 | 三级降级链；rollup 要求可加且单聚合，one_to_many 全降级 | Metric Views + [[Genie Ontology]] 双层 | 核心实现开源进 Spark；已加入 OSI；Power BI 缺席 | 治理有 ABAC 缺口，物化场景收紧 |
 | [[Snowflake Semantic Views]] | | | | | | |
 | [[dbt Semantic Layer]] | | | | | | |
 | [[Cube]] | | | | | | |
