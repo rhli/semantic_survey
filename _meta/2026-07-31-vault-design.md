@@ -38,10 +38,12 @@ semantic_survey/
 ├── 3-concepts/        # 概念页
 ├── 4-comparisons/     # 横向对比页（能力矩阵、按维度对比）
 ├── 5-insights/        # 综合判断与洞见
-├── _templates/        # Templater/核心模板
+├── _templates/        # 各类笔记模板
 ├── _meta/             # vault 自身的设计与约定文档（本文件）
-└── _assets/           # 图片等附件
+└── _assets/           # 笔记中嵌入的图片、图表、截图
 ```
+
+空目录（`0-inbox/`、`_assets/`）需放 `.gitkeep`，否则 git 不跟踪，clone 后目录丢失。
 
 ## 4. 笔记类型与 frontmatter schema
 
@@ -158,7 +160,25 @@ topics: ["[[Metrics Layer]]"]
 - **公司页内**：该公司的产品列表、相关 source 列表。
 - **对比页内**：能力矩阵的客观部分自动聚合，主观评级手工写。
 
-## 8. 工作流
+## 8. Obsidian 设置
+
+**Vault 根目录必须是 `semantic_survey/`，不是上层的 `huawei/`。** 上层目录含 `bird_data/`、`yunhe_table_cluster/`、`DG_nl2sql/` 等数据目录，作为 vault 打开会被全部索引。
+
+打开 vault 后需配置：
+
+| 位置 | 设置 | 值 |
+|---|---|---|
+| 设置 → 文件与链接 | 新附件的默认位置 | 「在下面指定的文件夹中」→ `_assets` |
+| 设置 → 文件与链接 | 新建笔记的默认位置 | `0-inbox` |
+| 设置 → 核心插件 → 模板 | 模板文件夹位置 | `_templates` |
+| 设置 → 第三方插件 | 安装并启用 | **Dataview**（Home 页与对比页的动态视图依赖它） |
+| Dataview 设置 | Enable JavaScript Queries | 开启（`Capability Matrix` 的按能力反查用到 dataviewjs） |
+
+附件位置这一项必须设，否则粘贴的图片会散落在 vault 根目录。
+
+`.obsidian/` 目录会被 git 跟踪（仅 `workspace*.json` 被忽略），因此插件配置随库同步、换机可复现。
+
+## 9. 工作流
 
 1. **调研**：AI 围绕一个主题/公司调研，原始产出落 `0-inbox/`。
 2. **结构化**：AI 将产出拆为 source 笔记（进 `1-sources/`），并创建/更新对应产品页、公司页、概念页，建双链，全部标 `status: draft`。
@@ -168,7 +188,7 @@ topics: ["[[Metrics Layer]]"]
 
 `0-inbox/` 中已完成结构化的原料即删除，inbox 保持趋近于空。
 
-## 9. 初始种子内容（首批搭建范围）
+## 10. 初始种子内容（首批搭建范围）
 
 - `Home.md` + 全部模板（6 类）+ 本设计文档。
 - 概念页：先建受控词表中的 10 个概念页骨架 + `Semantic Layer` 总览页。
@@ -177,7 +197,7 @@ topics: ["[[Metrics Layer]]"]
 - 对比页：先建 `Capability Matrix.md` 一个。
 - 种子页先建骨架（frontmatter + 章节标题 + 待调研问题清单），内容由后续调研工作流填充。
 
-## 10. 非目标
+## 11. 非目标
 
 - 不做自动化剪藏管道（Readwise 之类），来源笔记由调研工作流产生。
 - 不引入 Dataview 之外的复杂插件依赖（Templater 可选，核心模板够用）。
