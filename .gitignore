@@ -1,4 +1,11 @@
 .specstory/
 .cursorindexingignore
-.obsidian/workspace*.json
 .DS_Store
+
+# Obsidian：工作区布局是每台机器的本地状态，不同步
+.obsidian/workspace*.json
+
+# Obsidian 社区插件：只忽略插件代码，保留 manifest.json（记录用过的版本）
+# 与 data.json（插件设置），换机按 manifest 里的版本手工装一次即可。
+.obsidian/plugins/*/main.js
+.obsidian/plugins/*/styles.css

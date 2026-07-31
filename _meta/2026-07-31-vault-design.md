@@ -219,11 +219,11 @@ topics: ["[[Metrics Layer]]"]
 
 ### 唯一需要手工做的一步：安装 Dataview
 
-社区插件的代码不随库提交，必须手工安装一次：**设置 → 第三方插件 → 关闭安全模式 → 浏览 → 搜索 Dataview → 安装并启用**，然后在 Dataview 设置里开启 **Enable JavaScript Queries**（`Capability Matrix` 的按能力反查用到 dataviewjs）。
+**设置 → 第三方插件 → 关闭安全模式 → 浏览 → 搜索 Dataview → 安装并启用。** 当前使用的版本记录在 `.obsidian/plugins/dataview/manifest.json`（0.5.68）。
 
-装完后 `.obsidian/plugins/dataview/` 与 `community-plugins.json` 会出现，届时可一并提交，之后换机就不用再装。
+插件的**设置**随库提交（`data.json` 中 `enableDataviewJs: true`，`Capability Matrix` 的按能力反查用到 dataviewjs），所以装完不需要再逐项配。插件**代码**不提交——`main.js` 是 1.3MB 的压缩产物，每次升版都会在 git 历史里留一份新 blob。`.gitignore` 的规则是只忽略 `main.js` 与 `styles.css`，保留 `manifest.json` 与 `data.json`。
 
-**没装 Dataview 的症状**：Home 页的「洞见」「横向对比」「待修订」「最近更新」「全库统计」、`Capability Matrix` 的自动聚合、各公司页的「相关来源」全部显示为原始代码块而不是表格。这是判断插件是否生效最快的方式。
+**没装 Dataview 的症状**：Home 页的「洞见」「横向对比」「待修订」「最近更新」「全库统计」、`Capability Matrix` 的自动聚合、各公司页的「相关来源」全部显示为原始代码块而不是表格。若只有 `Capability Matrix` 的「按能力反查」报错、其余正常，说明插件在但 JavaScript Queries 没开。这两个症状是判断配置是否生效最快的方式。
 
 ### 侧边栏整洁度
 
