@@ -205,32 +205,42 @@ topics: ["[[Metrics Layer]]"]
 
 **Vault 根目录必须是 `semantic_survey/`，不是上层的 `huawei/`。** 上层目录含 `bird_data/`、`yunhe_table_cluster/`、`DG_nl2sql/` 等数据目录，作为 vault 打开会被全部索引。
 
-打开 vault 后需配置：
+**配置已随库提交，无需手工点选。** `.obsidian/` 被 git 跟踪（仅 `workspace*.json` 被忽略），下列设置以配置文件形式固化，clone 后打开即生效：
 
-| 位置 | 设置 | 值 |
-|---|---|---|
-| 设置 → 文件与链接 | 新附件的默认位置 | 「在下面指定的文件夹中」→ `_assets` |
-| 设置 → 文件与链接 | 新建笔记的默认位置 | `0-inbox` |
-| 设置 → 核心插件 → 模板 | 模板文件夹位置 | `_templates` |
-| 设置 → 第三方插件 | 安装并启用 | **Dataview**（Home 页与对比页的动态视图依赖它） |
-| Dataview 设置 | Enable JavaScript Queries | 开启（`Capability Matrix` 的按能力反查用到 dataviewjs） |
+| 文件 | 设置 | 值 | 作用 |
+|---|---|---|---|
+| `app.json` | `attachmentFolderPath` | `_assets` | 粘贴的图片写入 `_assets`，不散落到 vault 根目录 |
+| `app.json` | `newFileLocation` / `newFileFolderPath` | `folder` / `0-inbox` | 新建笔记落 inbox |
+| `app.json` | `alwaysUpdateLinks` | `true` | 重命名笔记时自动改全库双链，防止改名造成断链 |
+| `templates.json` | `folder` | `_templates` | 模板插件的模板目录 |
+| `appearance.json` | `enabledCssSnippets` | `["hide-infrastructure-folders"]` | 启用隐藏下划线目录的 CSS 片段 |
 
-附件位置这一项必须设，否则粘贴的图片会散落在 vault 根目录。
+改这些设置时，**在 Obsidian 界面里改比直接编辑文件安全**——Obsidian 运行时以内存状态为准，外部修改需重载 vault（Cmd+R）或重启才读取，且可能被 Obsidian 的下一次写入覆盖。
 
-`.obsidian/` 目录会被 git 跟踪（仅 `workspace*.json` 被忽略），因此插件配置、CSS 片段随库同步、换机可复现。
+### 唯一需要手工做的一步：安装 Dataview
+
+社区插件的代码不随库提交，必须手工安装一次：**设置 → 第三方插件 → 关闭安全模式 → 浏览 → 搜索 Dataview → 安装并启用**，然后在 Dataview 设置里开启 **Enable JavaScript Queries**（`Capability Matrix` 的按能力反查用到 dataviewjs）。
+
+装完后 `.obsidian/plugins/dataview/` 与 `community-plugins.json` 会出现，届时可一并提交，之后换机就不用再装。
+
+**没装 Dataview 的症状**：Home 页的「洞见」「横向对比」「待修订」「最近更新」「全库统计」、`Capability Matrix` 的自动聚合、各公司页的「相关来源」全部显示为原始代码块而不是表格。这是判断插件是否生效最快的方式。
 
 ### 侧边栏整洁度
 
 以点开头的目录（`.git`、`.obsidian`、`.specstory`）Obsidian 一律不显示，无需处理。
 
-下划线开头的四个基础设施目录会显示。两种手段，作用范围不同，可叠加：
+下划线开头的四个基础设施目录会显示。CSS 片段 `hide-infrastructure-folders.css` 把它们全部隐藏（`_templates`、`_assets`、`_archive`、`_meta`），已在 `appearance.json` 中启用。它只影响侧边栏显示，不影响搜索、图谱、Dataview、模板插件、附件写入；这些目录里的笔记仍可通过 Cmd+O、全局搜索、双链正常访问。`_meta` 的入口在 Home 页的双链上。
 
-| 手段 | 作用 | 适用 |
-|---|---|---|
-| CSS 片段 `hide-infrastructure-folders.css` | 仅隐藏侧边栏条目，不影响搜索、图谱、Dataview、模板插件 | 想让侧边栏只剩 `0-5` 内容目录 |
-| 设置 → 文件与链接 → 排除的文件 | 降低搜索排序权重、从图谱中移除，侧边栏中变灰但不消失 | 不希望存档原文干扰搜索结果 |
+另有一个作用范围不同的手段可叠加：**设置 → 文件与链接 → 排除的文件**。它降低搜索排序权重、从图谱中移除，但侧边栏中只变灰不消失。若把大量原文存档放进 `_archive`，建议在这里加入 `_archive`，避免全文搜索被存档内容淹没。
 
-CSS 片段已随库提供（默认隐藏 `_templates`、`_assets`、`_archive`，保留 `_meta`），在设置 → 外观 → CSS 代码片段中启用。若把大量原文存档放进 `_archive`，建议同时在「排除的文件」中加入 `_archive`，避免全文搜索被存档内容淹没。
+### 为什么不把内容移进子文件夹
+
+一个常见的想法是把 `0-5` 内容目录移进 `vault/`、让下划线目录留在外层、Obsidian 只打开 `vault/`。**这个方案不可行**：
+
+- `_templates/` 与 `_assets/` **必须在 vault 内**——模板文件夹与附件路径都是 vault 相对路径，vault 外的图片无法用 `![[...]]` 嵌入。所以它们挪不出去，侧边栏照样显示，CSS 片段仍然必需。
+- `_archive/` 与 `_meta/` 被正文双链引用（source 笔记的 `[[... (raw)]]`、Home 的 `[[2026-07-31-vault-design]]`）。双链只在 vault 内解析，移出去即断链——而存档能从 source 笔记点进去正是它存在的意义。
+
+结论：vault 根目录保持 `semantic_survey/`，显示问题用 CSS 解决。
 
 ## 9. 工作流
 
@@ -266,7 +276,9 @@ for p in glob.glob('**/*.md', recursive=True):
 missing = {}
 for p in glob.glob('**/*.md', recursive=True):
     if p.startswith('_archive/') or p.startswith('_templates/'): continue
-    txt = re.sub(r'```.*?```', '', open(p, encoding='utf-8').read(), flags=re.S)
+    txt = open(p, encoding='utf-8').read()
+    txt = re.sub(r'```.*?```', '', txt, flags=re.S)   # 围栏代码块
+    txt = re.sub(r'`[^`\n]*`', '', txt)               # 行内代码
     for m in re.findall(r'\[\[([^\]\|#]+)', txt):
         t = m.strip()
         if t and t not in basenames: missing.setdefault(t, []).append(p)
@@ -275,7 +287,11 @@ print("DUPS:", {k:v for k,v in basenames.items() if len(v)>1} or "none")
 EOF
 ```
 
-两处必要的细节：`_templates/` 要排除（模板里有 `<同名> (raw)` 这类占位符），代码块要剥掉（示例 YAML 里的双链不是真链接）；但 `_archive/` **必须计入 basenames**，否则 source 笔记指向存档的 `(raw)` 链接会被误报为断链。
+三处必要的细节，都是踩过的坑：
+
+- `_templates/` 要**排除**（模板里有 `<同名> (raw)` 这类占位符，不是真链接）。
+- 围栏代码块与**行内代码都要剥掉**（示例 YAML 和正文里讲解语法用的双链写法不是真链接，Obsidian 也不会渲染成链接）。
+- `_archive/` **必须计入 basenames**（虽然不扫描它的正文），否则 source 笔记指向存档的 `(raw)` 链接会被全部误报为断链。
 
 ## 12. 非目标
 

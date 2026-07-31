@@ -1,1 +1,6 @@
-{}
+{
+  "attachmentFolderPath": "_assets",
+  "newFileLocation": "folder",
+  "newFileFolderPath": "0-inbox",
+  "alwaysUpdateLinks": true
+}

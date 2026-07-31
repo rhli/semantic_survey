@@ -1,6 +1,11 @@
-/* 在左侧文件浏览器中隐藏基础设施文件夹，让侧边栏只剩 0-5 的内容目录。
+/* 在左侧文件浏览器中隐藏下划线前缀的基础设施文件夹，让侧边栏只剩 0-5 的内容目录。
  *
- * 启用方式：设置 → 外观 → CSS 代码片段 → 打开开关（若未出现先点刷新图标）。
+ * 本片段已在 appearance.json 的 enabledCssSnippets 中启用，随库提交，换机自动生效。
+ * 若要临时关闭：设置 → 外观 → CSS 代码片段 → 关掉开关。
+ *
+ * 为什么用 CSS 而不是把这些目录移出 vault：_templates 和 _assets 必须在 vault 内
+ * （模板文件夹与附件路径都是 vault 相对路径），_archive 与 _meta 被正文双链引用
+ * （双链只在 vault 内解析）。移出去会断链且解决不了显示问题。
  *
  * 注意：这只影响侧边栏显示。这些文件夹里的笔记仍可通过快速切换（Cmd+O）、
  * 全局搜索、双链正常访问；模板插件、附件写入也照常工作。
@@ -8,15 +13,10 @@
 
 .nav-folder:has(> .nav-folder-title[data-path="_templates"]),
 .nav-folder:has(> .nav-folder-title[data-path="_assets"]),
-.nav-folder:has(> .nav-folder-title[data-path="_archive"]) {
-  display: none;
-}
-
-/* _meta 存放本库的设计与约定文档，属于真实内容，默认保留显示。
- * 若也想隐藏，取消下面的注释： */
-
-/*
+.nav-folder:has(> .nav-folder-title[data-path="_archive"]),
 .nav-folder:has(> .nav-folder-title[data-path="_meta"]) {
   display: none;
 }
-*/
+
+/* _meta 存放设计与约定文档，属于真实内容，但入口在 Home 页的双链上，
+ * 不需要占侧边栏。若想让它重新显示，从上面的选择器列表里删掉最后一行。 */
