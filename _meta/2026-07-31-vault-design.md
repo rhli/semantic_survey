@@ -76,6 +76,8 @@ hq: San Francisco
 
 正文：一句话定位 → 语义层相关产品线（链接产品页）→ 战略与路线观察 → 时间线（重要发布/收购，逐条链 source）。
 
+公司即产品的单产品厂商（如 AtScale、Atlan）不强行拆两页：合并为一个 company 页，frontmatter 额外携带 `capabilities` 和 `ga_status`，保证 Dataview 按 capability 聚合时不遗漏。
+
 ### product（产品页）
 
 ```yaml

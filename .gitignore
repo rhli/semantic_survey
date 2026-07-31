@@ -1,0 +1,4 @@
+.specstory/
+.cursorindexingignore
+.obsidian/workspace*.json
+.DS_Store
