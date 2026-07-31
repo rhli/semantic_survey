@@ -39,7 +39,7 @@ TABLE type, file.mtime AS 更新时间 FROM "" WHERE status = "draft" AND type !
 ## 最近更新
 
 ```dataview
-LIST FROM "" WHERE type != "meta" SORT file.mtime DESC LIMIT 10
+LIST FROM "" WHERE type != "meta" AND type != "archive" SORT file.mtime DESC LIMIT 10
 ```
 
 ## 全库统计

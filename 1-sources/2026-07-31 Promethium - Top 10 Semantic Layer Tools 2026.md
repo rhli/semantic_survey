@@ -8,6 +8,7 @@ published: 2026-03-05
 accessed: 2026-07-31
 companies: [dbt-labs, atscale, snowflake, cube, databricks, denodo, promethium]
 topics: ["[[Semantic Layer]]", "[[Text2SQL]]", "[[Open Semantic Interchange]]"]
+archive: "[[2026-07-31 Promethium - Top 10 Semantic Layer Tools 2026 (raw)]]"
 ---
 
 # Promethium: Top 10 Semantic Layer Tools in 2026
@@ -29,4 +30,4 @@ Top 10 榜单：dbt Semantic Layer、AtScale、Snowflake Semantic Views、Cube�
 
 - [[Semantic Layer Vendor Landscape]] 的 Tier 划分参考了本榜单。
 - 偏差提示：Promethium 把自家排进 Top 10 并突出 context-native 叙事，对其结论打折使用。
-- 全文本地存档：agent-tools/318bec7f-ca08-4711-80bb-f9504f7983c3.txt（临时，重要内容已摘录）。
+- 全文存档：[[2026-07-31 Promethium - Top 10 Semantic Layer Tools 2026 (raw)]]

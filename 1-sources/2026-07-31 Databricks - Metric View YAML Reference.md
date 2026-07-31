@@ -8,6 +8,7 @@ published: 2026-07-24
 accessed: 2026-07-31
 companies: [databricks]
 topics: ["[[Semantic Model]]", "[[Metrics Layer]]", "[[Query Rewrite]]"]
+archive: "[[2026-07-31 Databricks - Metric View YAML Reference (raw)]]"
 ---
 
 # Databricks: Metric View YAML 语法参考（官方文档）
@@ -34,4 +35,5 @@ Metric View YAML 规范的完整语法参考。顶层字段：`version`、`comme
 ## 关联
 
 - [[Unity Catalog]] 产品页的语义模型表达力部分主要依据本文档。
+- 全文存档：[[2026-07-31 Databricks - Metric View YAML Reference (raw)]]（官方文档持续更新，页面标注"Last updated on Jul 24, 2026"，存档为核对基线）
 - `rely` 不校验、`fields/measures` 二分、composability 这几点在与 [[dbt Semantic Layer]]、[[Cube]] 对比时是关键差异点。

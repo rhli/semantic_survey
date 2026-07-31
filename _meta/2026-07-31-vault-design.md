@@ -40,10 +40,13 @@ semantic_survey/
 ├── 5-insights/        # 综合判断与洞见
 ├── _templates/        # 各类笔记模板
 ├── _meta/             # vault 自身的设计与约定文档（本文件）
-└── _assets/           # 笔记中嵌入的图片、图表、截图
+├── _assets/           # 笔记中嵌入的图片、图表、截图（Obsidian 附件目录）
+└── _archive/          # 关键原始材料的全文存档（防链接腐烂）
 ```
 
-空目录（`0-inbox/`、`_assets/`）需放 `.gitkeep`，否则 git 不跟踪，clone 后目录丢失。
+`_assets/` 与 `_archive/` 是两类不同的东西，不要混用：前者是笔记内容的一部分（嵌入显示的图），后者是不进入正文的证据留档。
+
+空目录（如 `0-inbox/`、`_assets/`）需放 `.gitkeep`，否则 git 不跟踪，clone 后目录丢失。
 
 ## 4. 笔记类型与 frontmatter schema
 
@@ -65,6 +68,31 @@ topics: ["[[Metrics Layer]]", "[[Text2SQL]]"]
 
 正文结构：摘要（3–5 句）→ 关键内容摘录/转述 → 与本库其他笔记的关联。
 命名：`YYYY-MM-DD <Publisher> - <标题短语>.md`，日期用 accessed 日期。
+
+可选 `archive` 字段：若做了全文存档，填存档笔记的双链。
+
+### archive（原文存档）
+
+放在 `_archive/`，用于对抗链接腐烂。**选择性存档**，只存三类：
+
+1. 官方规范/参考文档（会持续修订，需要核对基线）
+2. 技术白皮书
+3. 可能下线消失的一手材料
+
+普通博客、新闻不存——source 笔记里的要点摘录已足够。
+
+命名：`<对应 source 笔记名> (raw).md`。加 `(raw)` 后缀是为了避免与 source 笔记同名造成双链歧义。
+
+frontmatter 只需四项：
+
+```yaml
+type: archive
+url: <原始 URL>
+source_note: "[[<对应 source 笔记名>]]"
+archived: YYYY-MM-DD
+```
+
+`type: archive` 使其在 Dataview 查询中可被排除（Home 页的"最近更新"已排除）。若在 Obsidian 中觉得存档笔记干扰搜索与图谱，可在设置 → 文件与链接 → 排除的文件中加入 `_archive`。
 
 ### company（公司页）
 
@@ -181,7 +209,7 @@ topics: ["[[Metrics Layer]]"]
 ## 9. 工作流
 
 1. **调研**：AI 围绕一个主题/公司调研，原始产出落 `0-inbox/`。
-2. **结构化**：AI 将产出拆为 source 笔记（进 `1-sources/`），并创建/更新对应产品页、公司页、概念页，建双链，全部标 `status: draft`。
+2. **结构化**：AI 将产出拆为 source 笔记（进 `1-sources/`），并创建/更新对应产品页、公司页、概念页，建双链，全部标 `status: draft`。符合存档标准的材料同时存入 `_archive/`。
 3. **修订**：人审阅 draft 笔记，修订后改 `status: reviewed`。
 4. **沉淀**：积累一定材料后，写对比页和 insight。
 5. **维护**：发现过时信息标 `status: stale`，触发重新调研。
@@ -200,5 +228,6 @@ topics: ["[[Metrics Layer]]"]
 ## 11. 非目标
 
 - 不做自动化剪藏管道（Readwise 之类），来源笔记由调研工作流产生。
+- 不全量存档网页快照，只按第 4 节的三条标准选择性存档。
 - 不引入 Dataview 之外的复杂插件依赖（Templater 可选，核心模板够用）。
 - 不预先穷举所有厂商，按调研节奏逐步扩展。

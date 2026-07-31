@@ -8,6 +8,7 @@ published:
 accessed: 2026-07-31
 companies: [databricks]
 topics: ["[[Query Acceleration]]", "[[Query Rewrite]]", "[[Data Governance]]"]
+archive: "[[2026-07-31 Databricks - Materialization for Metric Views (raw)]]"
 ---
 
 # Databricks: Metric Views 的物化加速（官方文档）
@@ -37,4 +38,5 @@ Metric View 的查询加速机制文档。核心是三级查询改写降级链�
 ## 关联
 
 - [[Unity Catalog]] 的加速能力与真实边界。
+- 全文存档：[[2026-07-31 Databricks - Materialization for Metric Views (raw)]]（功能为 Preview，规则可能变动，存档为核对基线）
 - 与 [[Aloudata CAN]] 的"NoETL 免宽表 + 自动物化"、[[AtScale]] 的 autonomous aggregates、[[Cube]] 的 pre-aggregation 是 [[Query Acceleration]] 的正面对比材料——注意 Databricks 的物化仍需人工声明要物化哪些维度/指标组合，不是全自动。

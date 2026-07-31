@@ -8,6 +8,7 @@ published:
 accessed:
 companies: []
 topics: []
+archive: # 可选。原文存档笔记的双链，如 "[[<同名> (raw)]]"
 ---
 
 # <Publisher>: <标题>
