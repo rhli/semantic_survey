@@ -39,17 +39,28 @@ LIST FROM "5-insights" SORT date DESC
 ## 待修订（draft）
 
 ```dataview
-TABLE type, file.mtime AS 更新时间 FROM "" WHERE status = "draft" AND type != "meta" SORT file.mtime DESC LIMIT 20
+TABLE type, file.mtime AS 更新时间
+FROM "" AND !"_templates"
+WHERE status = "draft" AND type != "meta"
+SORT file.mtime DESC
+LIMIT 20
 ```
 
 ## 最近更新
 
 ```dataview
-LIST FROM "" WHERE type != "meta" AND type != "archive" SORT file.mtime DESC LIMIT 10
+LIST
+FROM "" AND !"_templates"
+WHERE type != "meta" AND type != "archive"
+SORT file.mtime DESC
+LIMIT 10
 ```
 
 ## 全库统计
 
 ```dataview
-TABLE length(rows) AS 数量 FROM "" WHERE type GROUP BY type
+TABLE length(rows) AS 数量
+FROM "" AND !"_templates"
+WHERE type
+GROUP BY type
 ```

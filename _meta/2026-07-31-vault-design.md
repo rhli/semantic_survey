@@ -201,6 +201,10 @@ topics: ["[[Metrics Layer]]"]
 - **公司页内**：该公司的产品列表、相关 source 列表。
 - **对比页内**：能力矩阵的客观部分自动聚合，主观评级手工写。
 
+**全域查询必须排除 `_templates`**：写 `FROM "" AND !"_templates"`。六个模板都带 `type: <类型>` 与 `status: draft`（这是必要的——模板的 frontmatter 会成为新笔记的 frontmatter，不能塞 `type: template` 之类的占位值让人每次去改），所以任何 `FROM ""` 的查询都会把它们算进去：「待修订」列表里混进 `tpl-*`，「全库统计」每一类计数虚高 1。按目录限定的查询（`FROM "2-companies"` 等）不受影响。
+
+`_archive` 的处理不同：`type: archive` 使它可用 `WHERE type != "archive"` 排除，「最近更新」已排除，「全库统计」保留（存档数量本身是有用信息）。
+
 ## 8. Obsidian 设置
 
 **Vault 根目录必须是 `semantic_survey/`，不是上层的 `huawei/`。** 上层目录含 `bird_data/`、`yunhe_table_cluster/`、`DG_nl2sql/` 等数据目录，作为 vault 打开会被全部索引。
@@ -267,7 +271,7 @@ topics: ["[[Metrics Layer]]"]
 
 在 vault 根目录执行：
 
-```bash
+````bash
 python3 - <<'EOF'
 import re, os, glob
 basenames = {}
@@ -285,13 +289,41 @@ for p in glob.glob('**/*.md', recursive=True):
 print("MISSING:", missing if missing else "none")
 print("DUPS:", {k:v for k,v in basenames.items() if len(v)>1} or "none")
 EOF
-```
+````
 
 三处必要的细节，都是踩过的坑：
 
 - `_templates/` 要**排除**（模板里有 `<同名> (raw)` 这类占位符，不是真链接）。
 - 围栏代码块与**行内代码都要剥掉**（示例 YAML 和正文里讲解语法用的双链写法不是真链接，Obsidian 也不会渲染成链接）。
 - `_archive/` **必须计入 basenames**（虽然不扫描它的正文），否则 source 笔记指向存档的 `(raw)` 链接会被全部误报为断链。
+
+### 表格截断检查
+
+改表格时容易在中间插入空行或段落，把一张表切成"表格 + 一堆纯文本管道行"。Obsidian 阅读视图下才看得出来，编辑视图里不明显。
+
+````bash
+python3 - <<'EOF'
+import glob, re
+bad = []
+for p in sorted(glob.glob('**/*.md', recursive=True)):
+    if p.startswith('_archive/'): continue
+    lines = open(p, encoding='utf-8').read().split('\n')
+    infence = False
+    for i, ln in enumerate(lines):
+        if ln.startswith('```'): infence = not infence; continue
+        if infence or not ln.lstrip().startswith('|'): continue
+        if (lines[i-1] if i else '').lstrip().startswith('|'): continue   # 接在表格行后，正常
+        nxt = lines[i+1] if i+1 < len(lines) else ''
+        if re.match(r'^\s*\|[\s:|-]+\|\s*$', nxt): continue              # 是表头，正常
+        bad.append((p, i+1, ln[:80]))
+print("孤立表格行:" if bad else "孤立表格行: none")
+for p, n, ln in bad: print(f"  {p}:{n}  {ln}")
+EOF
+````
+
+原理是：一个以 `|` 开头的行，要么紧接在另一个表格行之后，要么它自己是表头（下一行为 `|---|` 分隔行）。两者都不满足就是孤立行。
+
+两段脚本的外层围栏都用**四个反引号**，因为脚本正文里含三反引号字面量，三反引号围栏会被提前闭合——症状是后半段脚本渲染成正文、其后的小标题层级错乱。
 
 ## 12. 非目标
 

@@ -37,13 +37,12 @@ updated: 2026-07-31
 | 公司 | 产品 | 开源 | 要点 |
 |---|---|---|---|
 | **Fivetran + dbt Labs** | [[dbt Semantic Layer]]（MetricFlow） | MetricFlow 开源（Apache 2.0）；Fusion 引擎 2026-06 开源为 dbt Core v2.0 | metrics-as-code，YAML 与 dbt 模型同仓；5 类指标含 conversion/cumulative；主动防护 fan-out 与 chasm join。开源边界是"定义+编译"，托管 API 与缓存需付费 |
-
-（同厂商的 [[Agents Schema]] 属上下文层形态，见下一节。）
-
 | Cube | [[Cube]]（Cube Core 开源 + Cube 商业版） | Core 开源（Apache 2.0） | API-first/headless：SQL、REST、GraphQL、MCP；内置 pre-aggregation 缓存；agentic analytics 叙事 |
 | AtScale | [[AtScale]] | 闭源（SML 语言已开源） | 虚拟 OLAP + 智能聚合管理，MDX/DAX 兼容，面向 Excel/Power BI 存量企业 |
 | Denodo | Denodo Platform | 闭源 | 老牌数据虚拟化 + 语义层，联邦查询任意源 |
 | Palantir | Foundry Ontology | 闭源 | Ontology 驱动，语义服务于分析+操作闭环，重实施 |
+
+同厂商的 [[Agents Schema]] 属上下文层形态，归入下一节。
 
 ### 3. Metadata / Context Layer 阵营
 
