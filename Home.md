@@ -8,10 +8,11 @@ type: meta
 
 ## 入口
 
-- **全景地图**：[[Semantic Layer Vendor Landscape]]（四阵营 + 调研分层）
+- **全景地图**：[[Semantic Layer Vendor Landscape]]（五阵营 + 调研分层）
 - **能力矩阵**：[[Capability Matrix]]
 - **核心概念**：[[Semantic Layer]] · [[Metrics Layer]] · [[Semantic Model]] · [[Text2SQL]] · [[Context Layer]] · [[Open Semantic Interchange]]
-- **工具参照系**：[[Codegraph]] · [[PageIndex]] · [[OpenViking]]（"给 AI 供上下文"的相邻领域工具，为 "for data" 设计提供参照）
+- **工具参照系**：[[Codegraph]] · [[PageIndex]] · [[OpenViking]]（"给 AI 供上下文"的相邻领域工具）
+- **Building blocks**：[[SQLGlot]] · [[OpenLineage]] · [[DataHub]] · [[OpenMetadata]] · [[Kuzu]]（"codegraph for data" 的候选构件：解析层 / 采集层 / 图谱层 / 存储引擎）
 
 ## Tier 1 深研对象
 
@@ -19,11 +20,17 @@ type: meta
 |---|---|---|
 | [[Databricks]] | [[Unity Catalog]] · [[Genie]] · [[Genie Ontology]] | ✅ |
 | [[Fivetran + dbt Labs]] | [[dbt Semantic Layer]] · [[Agents Schema]] | ✅ |
-| [[Snowflake]] | [[Snowflake Semantic Views]] · [[Cortex Analyst]] | 骨架 |
-| [[Cube Dev]] | [[Cube]] | 骨架 |
-| [[AtScale]] | （公司即产品） | 骨架 |
-| [[Atlan]] | （公司即产品） | 骨架 |
-| [[Aloudata]] | [[Aloudata CAN]] | 骨架 |
+| [[Snowflake]] | [[Snowflake Semantic Views]] · [[Cortex Analyst]] | ✅ |
+| [[Cube Dev]] | [[Cube]] | ✅ |
+| [[AtScale]] | （公司即产品） | ✅ |
+| [[Atlan]] | （公司即产品） | ✅ |
+| [[Aloudata]] | [[Aloudata CAN]] | ✅ |
+| [[Google]] | [[Looker]] | ✅ |
+| [[Microsoft]] | [[Microsoft Fabric]] | ✅ |
+
+## Tier 2 观察
+
+[[Salesforce]]（Tableau）· [[ThoughtSpot]] · [[Omni]] · [[SuperSonic]]
 
 ## 横向对比
 

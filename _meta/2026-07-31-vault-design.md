@@ -161,7 +161,7 @@ topics: ["[[Metrics Layer]]"]
 type: tool
 status: draft
 tool: PageIndex
-category: code-index | doc-index | agent-context   # 按需扩展
+category: code-index | doc-index | agent-context | sql-parser | lineage-standard | metadata-graph | graph-engine   # 按需扩展
 license: MIT
 url: https://...
 ```

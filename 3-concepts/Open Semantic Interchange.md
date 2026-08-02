@@ -8,7 +8,7 @@ aliases: [OSI, Apache Ossie, 开放语义交换]
 
 ## 定义
 
-厂商中立的语义定义交换标准（JSON / YAML 格式），Snowflake 发起并领导工作组，Apache 2.0 许可，进入 Apache 孵化（代号 "Ossie"）。核心产物为 dataset、field、relationship、metric、dialect、extension。
+厂商中立的语义定义交换标准（JSON / YAML 格式），Snowflake、Salesforce、dbt Labs 2025-09 发起，**2026 年进入 Apache 孵化器并更名 Apache Ossie (incubating)**——规范、社区、使命不变，治理从 Snowflake 主导的工作组转为 Apache 流程。核心产物为 dataset、field、relationship、metric、dialect、extension；转换器为 hub-and-spoke 架构（核心规范为枢纽，各厂商格式为辐条，避免两两互转）。
 
 **它是规范层，不是运行时**——OSI 文档说明 `net_revenue` 是什么以及它与其他实体的关系，但自身不执行任何东西，也不提供查询接口，依赖消费工具。这是理解它与各家语义层引擎关系的关键。
 
@@ -23,11 +23,12 @@ aliases: [OSI, Apache Ossie, 开放语义交换]
 
 ## 参与方与时间线
 
-- 2025-09：发布，Snowflake 发起。作者引述的参与规模为 60+ 组织，含 Databricks、Google、AWS、dbt Labs、Salesforce。
-- 2026-06：名单扩至含 Alation、[[Atlan]]、Collibra、[[Cube Dev]]、ThoughtSpot。
+- 2025-09：发布，Snowflake、Salesforce、dbt Labs 为创始方，Google 早期参与。
+- 2026：进入 Apache 孵化器，更名 **Apache Ossie (incubating)**；官方成员名单 50+，含 Databricks、Atlan、AtScale、Cube、Denodo、DataHub、Collibra、Alation、ThoughtSpot、Omni、Lightdash、Sigma、Hex、Preset、RelationalAI、BlackRock、Mistral AI 等（完整名单见 [[2026-08-02 Apache - OSI 进入孵化器更名 Ossie]]）。
+- **微软缺席**——名单上最显眼的空位，与 Fabric IQ 自建闭环的策略一致。
 - 版本仍在 pre-1.0：Datus 材料称 0.1.x，Agents Schema 内嵌 schema 标为 **0.2.0.dev0**（时间点可能不同，均为 pre-1.0）。
 
-关于"这是 Snowflake 的产品吗"这个常见质疑，有一个有力的反驳：**一个可移植性标准只有竞争平台都采纳才成立**，这正是成员如此广泛的原因——广泛参与是标准生效的前提条件，而非厂商中立的证据不足。
+关于"这是 Snowflake 的产品吗"这个常见质疑，有两个反驳：其一，**一个可移植性标准只有竞争平台都采纳才成立**，广泛参与是标准生效的前提条件；其二，进入 Apache 孵化器后治理已中立化——质疑在 2026 年后基本失去依据。
 
 ## 关键跟踪点
 
@@ -43,8 +44,9 @@ aliases: [OSI, Apache Ossie, 开放语义交换]
 
 ## 参考来源
 
+- [[2026-08-02 Apache - OSI 进入孵化器更名 Ossie]]（更名与治理变更、50+ 成员名单）
 - [[2026-07-31 Datus - OSI 与 MetricFlow 的分层关系]]（分层关系的核心依据）
 - [[2026-07-31 dbt Labs - Agents Schema SPEC]]（OSI 作为 canonical 格式被使用的实证）
 - [[2026-07-31 Datus - Semantic Layer Tools List and OSI Status]]
 - [[2026-07-31 Promethium - Top 10 Semantic Layer Tools 2026]]（"OSI 以 MetricFlow 为规范基础"的错误来源，已修正）
-- GitHub: `open-semantic-interchange/OSI`
+- GitHub: `open-semantic-interchange/OSI`；官网已迁至 ossie.apache.org
