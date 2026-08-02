@@ -67,7 +67,7 @@ BI 拖拽和 AI 问数（[[Text2SQL]]）在语义层眼里是同一件事的不�
 
 ## 为什么北向接口形态决定语义层的价值半径
 
-- **[[Headless BI]] 运动的本质就是北向接口的开放化**。LookML 2012 年就发明了 metrics-as-code，但只服务 Looker；Cube、dbt SL 把同一份定义经标准接口暴露给所有消费方。"Define once, serve everywhere" 里的 everywhere，具体指的就是北向接口的宽度。
+- **[[Headless BI]] 运动的本质就是北向接口的开放化**——把语义资产从单一体验层解放出来，"define once, serve everywhere" 里的 everywhere 具体指的就是北向接口的宽度（这个模式本身的经济学见 [[Headless BI]] 页）。
 - **接口形态决定治理能传多远**。SQL 接口只能传查询和结果；MCP 能传发现、描述、同义词、示例查询。BI 工具不需要发现阶段（建模时人已选定模型），agent 必须现查——这是 2026 年各家抢着上 MCP server 的接口层原因。
 - **南向 × 北向合起来定义"通用性"宣称**。[[AtScale]] 的 "Universal" 翻译过来就是：南向会讲五种仓的方言 SQL，北向会讲 MDX/DAX 给 Excel、SQL 给 Tableau、MCP 给 agent。
 
