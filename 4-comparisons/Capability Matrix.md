@@ -11,6 +11,45 @@ updated: 2026-08-02
 
 Tier-1 对象的能力矩阵。客观部分由 Dataview 从产品页 frontmatter 自动聚合（改产品页即改矩阵）；深度评级待逐家深研后手工补充。
 
+## 能力地图
+
+能力词表的 10 个值不是平铺的——它们在架构里有位置。先看结构，再看下面的矩阵明细：
+
+```mermaid
+flowchart LR
+    subgraph core["核心链路（定义 → 编译 → 消费）"]
+        SM["semantic-modeling<br/>语义建模"] --> QR["query-rewrite<br/>查询编译"] --> HB["headless-bi<br/>接口暴露"]
+        ML["metrics-layer<br/>指标管理"] -. "最常见的落地形态" .-> SM
+        HB --> T2S["text2sql<br/>NL 入口"]
+    end
+    ACC["acceleration<br/>物化/缓存"] -. "为编译结果提速" .-> QR
+    subgraph cross["横切治理"]
+        GOV["governance"]
+        LIN["lineage"]
+        CAT["data-catalog"]
+    end
+    cross -.-> core
+    NOETL["noetl<br/>不是能力是路线：<br/>逻辑编织替代物理打宽"]
+```
+
+按域分组（词表登记处见 [[2026-07-31-vault-design]] 第 5 节）：
+
+| 域 | 能力 | 概念页 | 代表实现 |
+|---|---|---|---|
+| 核心链路 | semantic-modeling | [[Semantic Model]] | MetricFlow YAML、LookML、SML、Semantic Views DDL |
+| 核心链路 | query-rewrite | [[Query Rewrite]] | MetricFlow dataflow DAG、Cube Semantic SQL、AtScale 虚拟 OLAP |
+| 核心链路 | headless-bi | [[Headless BI]] | Cube 六接口、dbt SL JDBC/MCP |
+| 核心链路 | text2sql | [[Text2SQL]] | Cortex Analyst、Genie、Conversational Analytics |
+| 指标专项 | metrics-layer | [[Metrics Layer]] | dbt SL、Aloudata CAN、Cube |
+| 性能 | acceleration | [[Query Acceleration]] | AtScale autonomous aggregates、Cube pre-aggregation、CAN 三级物化 |
+| 横切治理 | governance / lineage / data-catalog | [[Data Governance]] · [[Data Lineage]] · [[Data Catalog]] | Unity Catalog、Atlan、DataHub |
+| 架构路线 | noetl | [[NoETL]] | Aloudata CAN、Denodo |
+
+两点读图说明：
+
+- **`metrics-layer` 与 `semantic-modeling` 是包含关系而非并列**：指标管理是语义建模最常见的落地形态，几乎所有厂商两者都有，矩阵里分开标只是为了区分"通用建模"与"指标专项治理"（判重、版本、目录）的强弱。
+- **`noetl` 不是能力是路线**：它回答"物理层要不要打宽"，与上面九个正交——一个厂商可以同时是 noetl 和 metrics-layer（Aloudata CAN 正是）。
+
 ## 自动聚合：产品 × 能力
 
 ```dataview
