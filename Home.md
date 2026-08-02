@@ -10,7 +10,7 @@ type: meta
 
 - **全景地图**：[[Semantic Layer Vendor Landscape]]（五阵营 + 调研分层）
 - **能力矩阵**：[[Capability Matrix]]
-- **核心概念**：[[Semantic Layer]] · [[Metrics Layer]] · [[Semantic Model]] · [[Text2SQL]] · [[Context Layer]] · [[Open Semantic Interchange]]
+- **核心概念**：[[Semantic Layer]] · [[BI]] · [[Metrics Layer]] · [[Semantic Model]] · [[Text2SQL]] · [[Context Layer]] · [[Open Semantic Interchange]]
 - **工具参照系**：[[Codegraph]] · [[PageIndex]] · [[OpenViking]]（"给 AI 供上下文"的相邻领域工具）
 - **Building blocks**：[[SQLGlot]] · [[OpenLineage]] · [[DataHub]] · [[OpenMetadata]] · [[Kuzu]]（"codegraph for data" 的候选构件：解析层 / 采集层 / 图谱层 / 存储引擎）
 

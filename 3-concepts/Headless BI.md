@@ -29,4 +29,4 @@ TABLE company, ga_status FROM "2-companies" WHERE contains(capabilities, "headle
 
 ## 相关概念
 
-[[Semantic Layer]]、[[Metrics Layer]]、[[Text2SQL]]
+[[Semantic Layer]]、[[BI]]、[[Metrics Layer]]、[[Text2SQL]]
