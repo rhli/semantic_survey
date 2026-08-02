@@ -38,6 +38,7 @@ semantic_survey/
 ├── 3-concepts/        # 概念页
 ├── 4-comparisons/     # 横向对比页（能力矩阵、按维度对比）
 ├── 5-insights/        # 综合判断与洞见
+├── 6-tools/           # 工具页：与本库主题相关的工具/基础设施（索引、检索、agent 上下文）
 ├── _templates/        # 各类笔记模板
 ├── _meta/             # vault 自身的设计与约定文档（本文件）
 ├── _assets/           # 笔记中嵌入的图片、图表、截图（Obsidian 附件目录）
@@ -153,6 +154,21 @@ topics: ["[[Metrics Layer]]"]
 
 正文：判断/推论 → 依据（链接 source 和产品页）→ 置信度与待验证点。
 命名：`YYYY-MM-DD <判断短语>.md`。
+
+### tool（工具页）
+
+```yaml
+type: tool
+status: draft
+tool: PageIndex
+category: code-index | doc-index | agent-context   # 按需扩展
+license: MIT
+url: https://...
+```
+
+正文：定位 → 核心机制 → 关键设计决策 → 与本库主题的关联（对 "for data" 方向的启示）→ 参考来源。
+
+工具页与产品页的区别：**产品页属于本库的调研对象**（语义层赛道里的厂商产品，进 capability 聚合），**工具页属于调研的参照系**（别的领域解决"给 AI 供上下文"问题的工具，用来启发设计判断）。工具页不带 `capabilities` 字段，不进 Capability Matrix。
 
 ## 5. capability 受控词表
 

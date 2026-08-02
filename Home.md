@@ -11,6 +11,7 @@ type: meta
 - **全景地图**：[[Semantic Layer Vendor Landscape]]（四阵营 + 调研分层）
 - **能力矩阵**：[[Capability Matrix]]
 - **核心概念**：[[Semantic Layer]] · [[Metrics Layer]] · [[Semantic Model]] · [[Text2SQL]] · [[Context Layer]] · [[Open Semantic Interchange]]
+- **工具参照系**：[[Codegraph]] · [[PageIndex]] · [[OpenViking]]（"给 AI 供上下文"的相邻领域工具，为 "for data" 设计提供参照）
 
 ## Tier 1 深研对象
 
